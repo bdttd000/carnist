@@ -1,6 +1,7 @@
 :root {
-    --primary: #BC0000;
-    --primary-dark: #B50000;
+    --primary: #00A7CC;
+    --primary-dark: #0D1B66;
+    --primary-gradient: linear-gradient(180deg, #00A7CC 0%, #0D1B66 100%);
 
     --black: #000000;
     --white: #FFFFFF;
@@ -23,16 +24,7 @@
     --grey-900: #262626;
     --grey-1000: #151515;
 
-    --main-bg: var(--grey-800);
-    --navbar-footer-bg: var(--grey-1000);
-    --card-bg: var(--grey-100);
-
     --default-transition: 0.3s ease;
-
-    --lg-devies: 1920px;
-    --md-devices: 1366px;
-    --sm-devices: 1024px;
-    --xs-devices: 768px;
 
     --navbar-height: 4rem;
     --content-max-width: 1200px;

@@ -1,0 +1,26 @@
+.login {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin-top: calc(0rem - var(--navbar-height)) !important;
+}
+
+.login-logo, .login-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.login-logo-img {
+    width: 30rem;
+    height: auto;
+    filter: invert(1);
+}
+
+.login-logo-text {
+    margin: 0;
+    font-size: 7rem;
+    color: var(--white)
+}
