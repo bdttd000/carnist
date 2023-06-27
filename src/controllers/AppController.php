@@ -42,4 +42,10 @@ class AppController
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}");
     }
+
+    public function redirectToLogin()
+    {
+        $url = "http://$_SERVER[HTTP_HOST]/login";
+        header("Location: {$url}");
+    }
 }
