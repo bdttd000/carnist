@@ -26,7 +26,7 @@ class Routing
 
         $controller = self::$routes[$action];
         $object = new $controller;
-        $action = $action ?: 'home';
+        $action = $action ?: 'login';
 
         $object->$action();
     }
