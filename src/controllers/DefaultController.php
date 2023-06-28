@@ -19,4 +19,19 @@ class DefaultController extends AppController
     {
         $this->render('register');
     }
+
+    public function statute()
+    {
+        $this->render('statute');
+    }
+
+    public function contact()
+    {
+        $this->render('contact');
+    }
+
+    public function privacyPolicy()
+    {
+        $this->render('privacyPolicy');
+    }
 }

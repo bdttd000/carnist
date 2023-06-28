@@ -20,6 +20,7 @@ $defaultCityName = $user->getUserInfo()->getCityName();
 </head>
 
 <body>
+    <?php include('public/views/components/navbar.php'); ?>
     <main>
         <?php
         print_r($defaultCityId);
@@ -28,6 +29,7 @@ $defaultCityName = $user->getUserInfo()->getCityName();
         <br>
         <a href="logout">wyloguj</a>
     </main>
+    <?php include('public/views/components/footer.php'); ?>
 </body>
 
 </html>

@@ -2,6 +2,10 @@
 
 @import "./variables/variables.css";
 
+@import "./components/navbar.css";
+@import "./components/footer.css";
+
+@import "./views/home.css";
 @import "./views/login.css";
 
 * {
@@ -24,6 +28,14 @@ main {
     display: flex;
 }
 
+.flex-center-justify {
+    justify-content: center;
+}
+
+.flex-center-align {
+    align-items: center;
+}
+
 .flex-center {
     justify-content: center;
     align-items: center;
@@ -35,6 +47,10 @@ main {
 
 .flex-row {
     flex-direction: row;
+}
+
+.white-text {
+    color: var(--white-text)
 }
 
 ul {
@@ -71,6 +87,10 @@ h5 {
 
 h6 {
     font-size: .67rem; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
 }
 
 .text-center {

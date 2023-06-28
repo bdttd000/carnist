@@ -24,6 +24,10 @@
     --grey-900: #262626;
     --grey-1000: #151515;
 
+    --main-bg: var(--grey-900);
+    --navbar-footer-bg: #262626;
+    --card-bg: var(--grey-100);
+
     --default-transition: 0.3s ease;
 
     --navbar-height: 4rem;
