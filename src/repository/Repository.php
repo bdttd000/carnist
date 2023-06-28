@@ -36,4 +36,21 @@ class Repository
 
         return $hash;
     }
+
+    public function getAllCities(): array
+    {
+        $stmt = $this->database->connect()->prepare("
+            SELECT * FROM city
+        ");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $output = [];
+
+        foreach ($result as $row) {
+            array_push($output, [$row['city_id'], $row['name']]);
+        }
+
+        return $output;
+    }
 }

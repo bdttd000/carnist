@@ -6,6 +6,10 @@ $userIsAuthenticated = $SessionController::isLogged();
 if ($SessionController::isLogged() === false) {
     $SessionController->redirectToLogin();
 }
+
+$user = $SessionController->unserializeUser();
+$defaultCityId = $user->getUserInfo()->getCityId();
+$defaultCityName = $user->getUserInfo()->getCityName();
 ?>
 
 <html lang="en">
@@ -13,11 +17,17 @@ if ($SessionController::isLogged() === false) {
 <head>
     <?php include('public/views/components/headImports.php'); ?>
     <title>home</title>
-    <a href="logout">asd</a>
 </head>
 
 <body>
-    <main>home</main>
+    <main>
+        <?php
+        print_r($defaultCityId);
+        print_r($defaultCityName);
+        ?>
+        <br>
+        <a href="logout">wyloguj</a>
+    </main>
 </body>
 
 </html>

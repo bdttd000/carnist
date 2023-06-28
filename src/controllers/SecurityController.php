@@ -44,22 +44,50 @@ class SecurityController extends AppController
             return $this->render('register');
         }
 
-        $nickname = $_POST['nickname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
+        $city_id = $_POST['city'];
 
-        $user = $this->userRepository->checkUser($nickname, $email);
+        $user = $this->userRepository->checkUser($email);
 
         if ($user) {
-            return $this->render('register', ['messages' => ['error' => 'Istnieje już taki użytkownik', 'nickname' => $nickname, 'email' => $email]]);
+            return $this->render(
+                'register',
+                [
+                    'messages' => [
+                        'error' => 'Istnieje już taki użytkownik',
+                        'email' => $email,
+                        'name' => $name,
+                        'surname' => $surname,
+                        'phone' => $phone,
+                        'address' => $address
+                    ]
+                ]
+            );
         }
 
         if ($password !== $password2) {
-            return $this->render('register', ['messages' => ['error' => 'Hasła nie są takie same', 'nickname' => $nickname, 'email' => $email]]);
+            return $this->render(
+                'register',
+                [
+                    'messages' => [
+                        'error' => 'Hasła nie są takie same',
+                        'email' => $email,
+                        'name' => $name,
+                        'surname' => $surname,
+                        'phone' => $phone,
+                        'address' => $address
+                    ]
+                ]
+            );
         }
 
-        $this->userRepository->addUser($nickname, $email, $password);
+        $this->userRepository->addUser($email, $password, $name, $surname, $phone, $address, $city_id);
 
         return $this->render('login', ['messages' => ['success' => 'Dodano użytkownika']]);
     }

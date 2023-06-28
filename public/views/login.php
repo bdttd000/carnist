@@ -22,10 +22,14 @@ if ($SessionController::isLogged()) {
             <div class="login-error-message">
                 <?php echo $messages['error']; ?>
             </div>
-            <input type="text" name="email" placeholder="podaj email">
+            <div class="login-success-message">
+                <?php echo $messages['success']; ?>
+            </div>
+            <input type="text" name="email" placeholder="podaj email" value="<?php if (isset($messages['email']))
+                echo $messages['email']; ?>" required>
             <input type="password" name="password" placeholder="podaj haslo">
             <button class='button drop-shadow-animate' type='submit'>Zaloguj</button>
-            <a href="#">Zarejestruj</a>
+            <a href="register">Zarejestruj</a>
         </form>
     </main>
 </body>
