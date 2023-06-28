@@ -15,7 +15,7 @@ class CarInfo
         string $description,
         string $directoryUrl,
         string $avatarUrl,
-        array $photos,
+        array $photos
     ) {
         $this->carInfoId = $carInfoId;
         $this->name = $name;

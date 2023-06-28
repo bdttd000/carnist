@@ -2,6 +2,8 @@
 $SessionController = new SessionController();
 $userIsAuthenticated = $SessionController::isLogged();
 
+$carController = new CarController();
+$cars = $carController->getCars();
 
 if ($SessionController::isLogged() === false) {
     $SessionController->redirectToLogin();
@@ -10,6 +12,11 @@ if ($SessionController::isLogged() === false) {
 $user = $SessionController->unserializeUser();
 $defaultCityId = $user->getUserInfo()->getCityId();
 $defaultCityName = $user->getUserInfo()->getCityName();
+
+// foreach ($cars as $car) {
+//     print_r($car->getCarInfo());
+//     echo '<br>';
+// }
 ?>
 
 <html lang="en">
@@ -22,12 +29,28 @@ $defaultCityName = $user->getUserInfo()->getCityName();
 <body>
     <?php include('public/views/components/navbar.php'); ?>
     <main>
-        <?php
-        print_r($defaultCityId);
-        print_r($defaultCityName);
-        ?>
-        <br>
-        <a href="logout">wyloguj</a>
+        <div class="container">
+            <!-- <div>SZUKAJKA</div> -->
+            <section class="card_container">
+                <?php foreach ($cars as $car): ?>
+                    <a href="car?id=<?= $car->getCarId(); ?>" class="card">
+                        <div class="card_info">
+                            <h2>
+                                <?= $car->getCarInfo()->getName(); ?>
+                            </h2>
+                            <p>
+                                <?= $car->getCarInfo()->getDescription(); ?>
+                            </p>
+                        </div>
+                        <div class="card_img_container">
+                            <img class="card_img"
+                                src="public/uploads/<?= $car->getCarInfo()->getDirectoryUrl(); ?>/<?= $car->getCarInfo()->getAvatarUrl(); ?>"
+                                alt="Zdjecie auta">
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </section>
+        </div>
     </main>
     <?php include('public/views/components/footer.php'); ?>
 </body>

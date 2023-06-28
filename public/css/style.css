@@ -4,6 +4,7 @@
 
 @import "./components/navbar.css";
 @import "./components/footer.css";
+@import "./components/card.css";
 
 @import "./views/home.css";
 @import "./views/login.css";
