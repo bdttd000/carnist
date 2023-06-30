@@ -30,7 +30,6 @@ $defaultCityName = $user->getUserInfo()->getCityName();
     <?php include('public/views/components/navbar.php'); ?>
     <main>
         <div class="container">
-            <!-- <div>SZUKAJKA</div> -->
             <section class="card_container">
                 <?php foreach ($cars as $car): ?>
                     <a href="car?id=<?= $car->getCarId(); ?>" class="card">
