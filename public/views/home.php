@@ -2,21 +2,16 @@
 $SessionController = new SessionController();
 $userIsAuthenticated = $SessionController::isLogged();
 
-$carController = new CarController();
-$cars = $carController->getCars();
-
-if ($SessionController::isLogged() === false) {
-    $SessionController->redirectToLogin();
-}
-
 $user = $SessionController->unserializeUser();
 $defaultCityId = $user->getUserInfo()->getCityId();
 $defaultCityName = $user->getUserInfo()->getCityName();
 
-// foreach ($cars as $car) {
-//     print_r($car->getCarInfo());
-//     echo '<br>';
-// }
+$carController = new CarController();
+$cars = $carController->getCars($defaultCityId);
+
+if ($SessionController::isLogged() === false) {
+    $SessionController->redirectToLogin();
+}
 ?>
 
 <html lang="en">

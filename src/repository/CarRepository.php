@@ -3,9 +3,17 @@
 require_once 'Repository.php';
 require_once __DIR__ . '/../models/Car.php';
 require_once __DIR__ . '/../models/CarInfo.php';
+require_once __DIR__ . '/../controllers/SessionController.php';
 
 class CarRepository extends Repository
 {
+    private $sessionController;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->sessionController = new SessionController();
+    }
     public function getCarsByCity(string $cityId): ?array
     {
         $stmt = $this->database->connect()->prepare('
@@ -15,6 +23,7 @@ class CarRepository extends Repository
             JOIN car_city cc ON c.car_id = cc.car_id
             JOIN city ON cc.city_id = city.city_id
             WHERE city.city_id= :cityId
+            ORDER BY c.car_id DESC
         ');
         $stmt->bindParam(':cityId', $cityId, PDO::PARAM_INT);
         $stmt->execute();
@@ -111,5 +120,59 @@ class CarRepository extends Repository
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addCar(string $name, string $description, int $cityId, string $directoryUrl, string $avatarUrl, array $photos): void
+    {
+        $carId = $this->getNextId('car', 'car_id');
+        $carInfoId = $this->getNextId('car_info', 'car_info_id');
+        $userId = $this->sessionController->unserializeUser()->getUserID();
+        $creationDate = new DateTime();
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO car (car_id, user_id, car_info_id, active, creation_date) VALUES (?, ?, ?, ?, ?)
+        ');
+
+        $stmt->execute([
+            $carId,
+            $userId,
+            $carInfoId,
+            true,
+            $creationDate->format('Y-m-d')
+        ]);
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO car_info (car_info_id, name, description, directory_url, avatar_url) VALUES (?, ?, ?, ?, ?)
+        ');
+
+        $stmt->execute([
+            $carInfoId,
+            $name,
+            $description,
+            $directoryUrl,
+            $avatarUrl
+        ]);
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO car_city (car_id, city_id) VALUES (?, ?)
+        ');
+
+        $stmt->execute([
+            $carId,
+            $cityId
+        ]);
+
+        foreach ($photos as $photo) {
+            $photoId = $this->getNextId('photos', 'photo_id');
+            $stmt = $this->database->connect()->prepare('
+                INSERT INTO photos (photo_id, car_info_id, photo_url) VALUES (?, ?, ?)
+            ');
+
+            $stmt->execute([
+                $photoId,
+                $carInfoId,
+                $photo
+            ]);
+        }
     }
 }

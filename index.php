@@ -7,12 +7,13 @@ $base = parse_url($path, PHP_URL_PATH);
 $query = parse_url($path, PHP_URL_QUERY);
 
 //CarController
-Routing::get('home', 'CarController');
 Routing::get('car', 'CarController');
 Routing::get('addCar', 'CarController');
+Routing::post('addCarForm', 'CarController');
 
 //DefaultController
 Routing::get('', 'DefaultController');
+Routing::get('home', 'DefaultController');
 Routing::get('login', 'DefaultController');
 Routing::get('register', 'DefaultController');
 Routing::get('statute', 'DefaultController');

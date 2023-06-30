@@ -24,8 +24,18 @@
     border: 1.5px solid white;
 }
 
+.textarea {
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 1rem;
+    color: var(--white-black);
+    font-size: 1.2rem;
+    outline: none;
+}
+
 @media screen and (max-width: 600px) {
-    .input {
+    .input, .textarea {
         width: 80vw;
     }
 }

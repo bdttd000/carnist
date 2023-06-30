@@ -2,16 +2,16 @@
 $SessionController = new SessionController();
 $userIsAuthenticated = $SessionController::isLogged();
 
+$user = $SessionController->unserializeUser();
+$defaultCityId = $user->getUserInfo()->getCityId();
+$defaultCityName = $user->getUserInfo()->getCityName();
+
 $carController = new CarController();
-$cars = $carController->getCars();
+$cars = $carController->getCars($defaultCityId);
 
 if ($SessionController::isLogged() === false) {
     $SessionController->redirectToLogin();
 }
-
-$user = $SessionController->unserializeUser();
-$defaultCityId = $user->getUserInfo()->getCityId();
-$defaultCityName = $user->getUserInfo()->getCityName();
 ?>
 
 <html lang="en">
@@ -56,7 +56,7 @@ $defaultCityName = $user->getUserInfo()->getCityName();
                     $photos = $car->getCarInfo()->getPhotos();
                     foreach ($photos as $photoInfo) {
                         echo '<img 
-                        src="public/uploads/' . $car->getCarInfo()->getDirectoryUrl() . '/' . $car->getCarInfo()->getAvatarUrl() . '"
+                        src="public/uploads/' . $car->getCarInfo()->getDirectoryUrl() . '/' . $photoInfo['photo_url'] . '"
                         alt="Zdjecie auta">';
                     }
                     ?>

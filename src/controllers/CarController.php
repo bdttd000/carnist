@@ -25,11 +25,6 @@ class CarController extends AppController
         $this->sessionController = new SessionController();
     }
 
-    public function home()
-    {
-        $this->render('home');
-    }
-
     public function car($query = '')
     {
         if ($query == '') {
@@ -49,6 +44,7 @@ class CarController extends AppController
 
     public function addCar()
     {
+
         $this->render('addCar');
     }
 
@@ -57,9 +53,9 @@ class CarController extends AppController
         return $this->carRepository->getCarById($carId);
     }
 
-    public function getCars()
+    public function getCars($cityId)
     {
-        return $this->carRepository->getCarsByCity(1);
+        return $this->carRepository->getCarsByCity($cityId);
     }
 
     public function addCarForm()
@@ -67,24 +63,48 @@ class CarController extends AppController
         if (
             !(
                 $this->isPost()
-                && is_uploaded_file($_FILES['meme']['tmp_name'])
-                && $this->validateFile($_FILES['meme'])
+                && is_uploaded_file($_FILES['avatar']['tmp_name'])
+                && $this->validateFile($_FILES['avatar'])
                 && $this->validateTitle($_POST['title'])
             )
         ) {
             return $this->redirectToHome();
         }
 
-        $newUrl = $this->carRepository->generateID() . '.' . pathinfo($_FILES['meme']['name'], PATHINFO_EXTENSION);
+        $folderName = $this->carRepository->generateID();
+        $newPath = dirname(__DIR__) . self::UPLOAD_DIRECTORY . $folderName;
+        mkdir($newPath);
+
+        $avatarUrl = $this->carRepository->generateID() . '.' . pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
 
         move_uploaded_file(
-            $_FILES['meme']['tmp_name'],
-            dirname(__DIR__) . self::UPLOAD_DIRECTORY . $newUrl
+            $_FILES['avatar']['tmp_name'],
+            $newPath . '/' . $avatarUrl
         );
+
+        $photos = [];
+        if ($_FILES['photos']) {
+            for ($i = 0; $i < count($_FILES['photos']['name']); $i++) {
+                $tmp_name = $_FILES['photos']['tmp_name'][$i];
+                $ext = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+                $newName = $this->carRepository->generateID() . '.' . $ext;
+
+                move_uploaded_file(
+                    $tmp_name,
+                    $newPath . '/' . $newName
+                );
+
+                array_push($photos, $newName);
+            }
+        }
 
         $this->carRepository->addCar(
             $_POST['title'],
-            $newUrl
+            $_POST['description'],
+            intval($_POST['city']),
+            $folderName,
+            $avatarUrl,
+            $photos
         );
 
         return $this->redirectToHome();
