@@ -39,7 +39,9 @@ $defaultCityName = $user->getUserInfo()->getCityName();
                                 <?= $car->getCarInfo()->getName(); ?>
                             </h2>
                             <p>
-                                <?= $car->getCarInfo()->getDescription(); ?>
+                                <?php
+                                echo strlen($car->getCarInfo()->getDescription()) > 200 ? substr($car->getCarInfo()->getDescription(), 0, 300) . '...' : $car->getCarInfo()->getDescription();
+                                ?>
                             </p>
                         </div>
                         <div class="card_img_container">

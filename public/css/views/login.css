@@ -13,6 +13,10 @@
     flex: 1;
 }
 
+.login-form {
+    gap: 1rem;
+}
+
 .login-logo-img {
     width: 30rem;
     height: auto;
