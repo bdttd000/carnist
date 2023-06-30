@@ -53,6 +53,52 @@ class UserRepository extends Repository
         );
     }
 
+    public function getUserById($userId): ?User
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT u.*, p.name privilege_name, ui.name user_info_name, ui.surname, ui.phone, ui.address, c.city_id city_id, c.name city_name
+            FROM users u 
+            JOIN privilege p ON u.privilege_id = p.privilege_id 
+            JOIN user_info ui ON u.user_info_id = ui.user_info_id
+            JOIN user_info_city uic ON ui.user_info_id = uic.user_info_id
+            JOIN city c ON c.city_id = uic.city_id
+            WHERE user_id = :userId
+        ');
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return null;
+        }
+
+        $privilege = new Privilege(
+            $user['privilege_id'],
+            $user['privilege_name']
+        );
+
+        $userInfo = new UserInfo(
+            $user['user_info_id'],
+            $user['user_info_name'],
+            $user['surname'],
+            $user['phone'],
+            $user['address'],
+            $user['city_id'],
+            $user['city_name']
+        );
+
+        return new User(
+            $user['user_id'],
+            $privilege,
+            $userInfo,
+            $user['email'],
+            $user['password'],
+            $user['enabled'],
+            $user['creation_date']
+        );
+    }
+
     public function checkUser(string $email): bool
     {
         $stmt = $this->database->connect()->prepare('

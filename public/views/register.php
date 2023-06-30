@@ -25,16 +25,18 @@ $cities = $Repository->getAllCities();
             <div class="login-error-message">
                 <?php echo $messages['error']; ?>
             </div>
-            <input type="text" name="email" placeholder="podaj email" value="<?php if (isset($messages['email']))
+            <input class="input input-text-primary" type="text" name="email" placeholder="Podaj email" value="<?php if (isset($messages['email']))
                 echo $messages['email']; ?>" required>
-            <input type="password" name="password" placeholder="Podaj hasło" required>
-            <input type="password" name="password2" placeholder="Powtórz hasło" required>
-            <input type="text" name="name" placeholder="Imię" value="<?php if (isset($messages['name']))
+            <input class="input input-text-primary" type="password" name="password" placeholder="Podaj hasło" required>
+            <input class="input input-text-primary" type="password" name="password2" placeholder="Powtórz hasło"
+                required>
+            <input class="input input-text-primary" type="text" name="name" placeholder="Imię" value="<?php if (isset($messages['name']))
                 echo $messages['name']; ?>" required>
-            <input type="text" name="surname" placeholder="Nazwisko" value="<?php if (isset($messages['surname']))
+            <input class="input input-text-primary" type="text" name="surname" placeholder="Nazwisko" value="<?php if (isset($messages['surname']))
                 echo $messages['surname']; ?>" required>
-            <input type="text" name="phone" placeholder="Numer telefonu (np. +48 ...)" value="<?php if (isset($messages['phone']))
-                echo $messages['phone']; ?>" required>
+            <input class="input input-text-primary" type="text" name="phone" placeholder="Numer telefonu (np. +48 ...)"
+                value="<?php if (isset($messages['phone']))
+                    echo $messages['phone']; ?>" required>
             <select name="city" required>
                 <?php
                 foreach ($cities as $city) {
@@ -42,12 +44,12 @@ $cities = $Repository->getAllCities();
                 }
                 ?>
             </select>
-            <input type="text" name="address" placeholder="Adres zamieszkania" value="<?php if (isset($messages['address']))
+            <input class="input input-text-primary" type="text" name="address" placeholder="Adres zamieszkania" value="<?php if (isset($messages['address']))
                 echo $messages['address']; ?>" required>
-            <button class='button drop-shadow-animate' type='submit'>Zarejestruj</button>
+            <button class='button button-primary drop-shadow-animate' type='submit'>Zarejestruj</button>
             <br>
-            Masz juz konto?
-            <a href="login">Zaloguj</a>
+            <div style="font-size: 1.1rem; color: white;">Masz juz konto?</div>
+            <a class="button button-primary" href="login">Zaloguj</a>
         </form>
     </main>
 </body>

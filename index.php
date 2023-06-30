@@ -3,10 +3,13 @@
 require 'Routing.php';
 
 $path = trim($_SERVER['REQUEST_URI'], '/');
-$path = parse_url($path, PHP_URL_PATH);
+$base = parse_url($path, PHP_URL_PATH);
+$query = parse_url($path, PHP_URL_QUERY);
 
 //CarController
-Routing::get('home', 'DefaultController');
+Routing::get('home', 'CarController');
+Routing::get('car', 'CarController');
+Routing::get('addCar', 'CarController');
 
 //DefaultController
 Routing::get('', 'DefaultController');
@@ -23,4 +26,4 @@ Routing::post('checkRegister', 'SecurityController');
 //SessionController
 Routing::post('logout', 'SessionController');
 
-Routing::run($path);
+Routing::run($base, $query);
