@@ -22,3 +22,9 @@
     background-color: inherit;
     border: 1.5px white;
 }
+
+@media screen and (max-width: 600px) {
+    .button {
+        width: 80vw;
+    }
+}

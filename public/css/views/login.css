@@ -28,3 +28,31 @@
     font-size: 7rem;
     color: var(--white)
 }
+
+@media screen and (max-width: 1024px) {
+    .login {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .login-logo-img {
+        width: 80vw;
+    }
+
+    .login-logo-text {
+        font-size: 8rem;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    .login-logo-text {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .login-logo-text {
+        font-size: 3rem;
+    }
+}

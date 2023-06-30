@@ -23,3 +23,9 @@
     background-color: inherit;
     border: 1.5px solid white;
 }
+
+@media screen and (max-width: 600px) {
+    .input {
+        width: 80vw;
+    }
+}

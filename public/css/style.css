@@ -10,6 +10,7 @@
 
 @import "./views/home.css";
 @import "./views/login.css";
+@import "./views/car.css";
 
 * {
     box-sizing: border-box;
@@ -20,6 +21,7 @@ body {
     margin: var(--navbar-height) 0 0 0;
     padding: 0;
     background: var(--primary-gradient);
+    overflow-x: hidden;
 }
 
 main {
@@ -116,6 +118,16 @@ h1, h2, h3, h4, h5, h6 {
 .container {
     max-width: var(--content-max-width);
     margin: auto;
+}
+
+.login-error-message {
+    color: var(--error);
+    font-size: 1.5rem;
+}
+
+.login-success-message {
+    color: var(--success);
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1365px) {
