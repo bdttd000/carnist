@@ -1,6 +1,8 @@
 <?php
 $SessionController = new SessionController();
-$userIsAuthenticated = $SessionController::isLogged();
+if ($SessionController::isLogged() === false) {
+    $SessionController->redirectToLogin();
+}
 
 $user = $SessionController->unserializeUser();
 $defaultCityId = $user->getUserInfo()->getCityId();
@@ -8,10 +10,6 @@ $defaultCityName = $user->getUserInfo()->getCityName();
 
 $carController = new CarController();
 $cars = $carController->getCars($defaultCityId);
-
-if ($SessionController::isLogged() === false) {
-    $SessionController->redirectToLogin();
-}
 ?>
 
 <html lang="en">

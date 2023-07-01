@@ -1,8 +1,5 @@
 <?php
 $SessionController = new SessionController();
-$userIsAuthenticated = $SessionController::isLogged();
-
-
 if ($SessionController::isLogged() === false) {
     $SessionController->redirectToLogin();
 }

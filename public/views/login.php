@@ -1,5 +1,5 @@
 <?php
-$SessionController = new SessionController;
+$SessionController = new SessionController();
 if ($SessionController::isLogged()) {
     $SessionController->redirectToHome();
 }
